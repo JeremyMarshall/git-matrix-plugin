@@ -21,11 +21,11 @@ class SeleniumDynamicCapability extends  Container {
     }
 
     List<SeleniumCapabilityRO> getSeleniumCapabilities(){
-        return getComplexAxisItems()
+        return getAxisItems()
     }
 
     void setSeleniumCapabilities(List<SeleniumCapabilityRO> sc){
-        setComplexAxisItems(sc)
+        setAxisItems(sc)
     }
 
     String toString(){

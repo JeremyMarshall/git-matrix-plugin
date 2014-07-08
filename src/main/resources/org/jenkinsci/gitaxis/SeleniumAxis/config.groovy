@@ -18,8 +18,8 @@ namespace(lib.FormTagLib).with {
         entry(field:"seleniumCapabilities") {
             hetero_list( name:       "seleniumCapabilities",
                       hasHeader: true,
-                      descriptors:descriptor.complexAxisItemTypes(),
-                      items:      instance? instance.getComplexAxisItems():descriptor.loadDefaultItems())
+                      descriptors:descriptor.axisItemTypes(),
+                      items:      instance? instance.getAxisItems():descriptor.loadDefaultItems())
         }
     }
 }

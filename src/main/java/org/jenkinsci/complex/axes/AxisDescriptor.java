@@ -15,8 +15,8 @@ public abstract class AxisDescriptor extends hudson.matrix.AxisDescriptor {
         load();
     }
 
-    //public abstract DescriptorExtensionList<? extends Item, Descriptor<? extends Item> > complexAxisItemTypes();
-    //public DescriptorExtensionList<Item,Descriptor<Item> > complexAxisItemTypes() {
+    //public abstract DescriptorExtensionList<? extends Item, Descriptor<? extends Item> > axisItemTypes();
+    //public DescriptorExtensionList<Item,Descriptor<Item> > axisItemTypes() {
     //    DescriptorExtensionList<Item,Descriptor<Item> >  xxx =  Jenkins.getInstance().<Item,Descriptor<Item>>getDescriptorList(Item.class);
     //
     //    return xxx;
@@ -31,19 +31,19 @@ public abstract class AxisDescriptor extends hudson.matrix.AxisDescriptor {
         return true;
     }
 
-    public abstract List<ItemDescriptor> complexAxisItemTypes();
+    public abstract List<ItemDescriptor> axisItemTypes();
 
     public  List<? extends Item> loadDefaultItems(){
 
-        List<ItemDescriptor> cait =  complexAxisItemTypes();
+        List<ItemDescriptor> ait =  axisItemTypes();
 
-        ArrayList<Item> cai =  new ArrayList<Item>();
+        ArrayList<Item> ai =  new ArrayList<Item>();
 
-        for( int i = 0; i < cait.size(); i++){
-            cait.get(i).loadDefaultItems(cai);
+        for( int i = 0; i < ait.size(); i++){
+            ait.get(i).loadDefaultItems(ai);
         }
 
-        return cai;
+        return ai;
     }
 
     @Override

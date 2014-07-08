@@ -4,31 +4,31 @@ import java.util.List;
 
 public abstract class Container extends Item {
 
-    private List<? extends Item> complexAxisItems;
+    private List<? extends Item> axisItems;
 
-    public Container(List<? extends Item> complexAxisItems) {
+    public Container(List<? extends Item> axisItems) {
 
-        if(complexAxisItems == null)
-            this.complexAxisItems = emptyList();
+        if(axisItems == null)
+            this.axisItems = emptyList();
         else
-            this.complexAxisItems = complexAxisItems;
+            this.axisItems = axisItems;
     }
 
-    public List<? extends Item> getComplexAxisItems(){
-        if(complexAxisItems == null)
+    public List<? extends Item> getAxisItems(){
+        if(axisItems == null)
             return emptyList();
         else
-            return complexAxisItems;
+            return axisItems;
     }
 
-    public void setComplexAxisItems(List<? extends Item> cai){
-        complexAxisItems = cai;
+    public void setAxisItems(List<? extends Item> cai){
+        axisItems = cai;
     }
 
     @Override
     public String toString() {
         StringBuilder ret = new StringBuilder();
-        for (Item item : getComplexAxisItems()) {
+        for (Item item : getAxisItems()) {
             ret.append(item.toString()).append(' ');
         }
         return ret.toString();

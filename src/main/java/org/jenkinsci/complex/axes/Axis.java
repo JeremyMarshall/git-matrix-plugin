@@ -9,30 +9,26 @@ import java.util.Map;
 
 public abstract class Axis extends hudson.matrix.Axis {
 
-    private final List<? extends Item> complexAxisItems;
-
-    public List<? extends Item> getComplexAxisItems(){
-        return Collections.unmodifiableList(complexAxisItems);
-    }
+    private final List<? extends Item> axisItems;
 
     public Axis(String name, String value){
         super(name, value);
-        complexAxisItems = new ArrayList<Item>();
+        axisItems = new ArrayList<Item>();
     }
 
-    public Axis(String name, List<? extends Item> complexAxisItem){
-        super(name, Axis.convertToAxisValue(complexAxisItem));
-        this.complexAxisItems = (complexAxisItem!=null)?complexAxisItem: Item.emptyList();
+    public Axis(String name, List<? extends Item> axisItems){
+        super(name, Axis.convertToAxisValue(axisItems));
+        this.axisItems = (axisItems!=null)?axisItems: Item.emptyList();
     }
 
-    public static String convertToAxisValue(List<? extends Item> complexAxisItems){
+    public static String convertToAxisValue(List<? extends Item> axisItems){
         StringBuilder ret = new StringBuilder();
         boolean valueDefined = false;
 
-        if(complexAxisItems == null)
-            complexAxisItems = Item.emptyList();
+        if(axisItems == null)
+            axisItems = Item.emptyList();
 
-        for (Item item : complexAxisItems) {
+        for (Item item : axisItems) {
             String i = item.toString();
             if( i.length() > 0){
                 valueDefined = true;
@@ -46,6 +42,10 @@ public abstract class Axis extends hudson.matrix.Axis {
         return ret.toString();
     }
 
+    public List<? extends Item> getAxisItems(){
+        return Collections.unmodifiableList(axisItems);
+    }
+
     @Override
     public void addBuildVariable(String value, Map<String,String> map){}
 
@@ -54,8 +54,8 @@ public abstract class Axis extends hudson.matrix.Axis {
     {
         List<String> ret = new ArrayList<String>();
 
-        for( int i = 0; i < complexAxisItems.size(); i++){
-            complexAxisItems.get(i).rebuild(ret);
+        for( int i = 0; i < axisItems.size(); i++){
+            axisItems.get(i).rebuild(ret);
         }
 
         return ret;
@@ -67,8 +67,8 @@ public abstract class Axis extends hudson.matrix.Axis {
     {
         List<String> ret = new ArrayList<String>();
 
-        for( int i = 0; i < complexAxisItems.size(); i++){
-            complexAxisItems.get(i).getValues(ret);
+        for( int i = 0; i < axisItems.size(); i++){
+            axisItems.get(i).getValues(ret);
         }
         return ret;
     }

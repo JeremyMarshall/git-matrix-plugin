@@ -41,7 +41,7 @@ public class SeleniumAxis extends Axis{
     }
 
     public List<? extends SeleniumCapability> getSeleniumCapabilities(){
-        return this.getComplexAxisItems() as List<? extends SeleniumCapability>
+        return this.getAxisItems() as List<? extends SeleniumCapability>
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SeleniumAxis extends Axis{
             this.server = server
         }
 
-        public  List<ItemDescriptor> complexAxisItemTypes(){
+        public  List<ItemDescriptor> axisItemTypes(){
             def cait = Jenkins.getInstance().<Item,ItemDescriptor>getDescriptorList(Item.class)
 
             def ret = new ArrayList<ItemDescriptor>()
