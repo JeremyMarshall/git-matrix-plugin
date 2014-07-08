@@ -1,6 +1,5 @@
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
-import org.junit.Rule
 import spock.lang.Specification
 
 class EmptyGrid_v2_35_0 extends Specification{

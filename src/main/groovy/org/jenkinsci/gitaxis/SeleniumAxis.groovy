@@ -21,22 +21,22 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 */
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
 import hudson.Extension
-import hudson.DescriptorExtensionList
-import org.kohsuke.stapler.DataBoundConstructor
 import hudson.util.FormValidation
-import org.kohsuke.stapler.QueryParameter
 import jenkins.model.Jenkins
-import hudson.matrix.Axis
-import hudson.matrix.AxisDescriptor
+import org.jenkinsci.complex.axes.Axis
+import org.jenkinsci.complex.axes.AxisDescriptor
+import org.jenkinsci.complex.axes.Item
+import org.jenkinsci.complex.axes.ItemDescriptor
+import org.kohsuke.stapler.DataBoundConstructor
+import org.kohsuke.stapler.QueryParameter
 
-
-public class SeleniumAxis extends ComplexAxis{
+public class SeleniumAxis extends Axis{
 
     @DataBoundConstructor
-    public SeleniumAxis(String name, List<? extends ComplexAxisItem> seleniumCapabilities){
+    public SeleniumAxis(String name, List<? extends Item> seleniumCapabilities){
         super(name, seleniumCapabilities)
     }
 
@@ -59,7 +59,7 @@ public class SeleniumAxis extends ComplexAxis{
 
 
     @Extension
-    public static class DescriptorImpl extends ComplexAxisDescriptor{
+    public static class DescriptorImpl extends AxisDescriptor{
         private String server
 
         public String getServer(){
@@ -73,10 +73,10 @@ public class SeleniumAxis extends ComplexAxis{
             this.server = server
         }
 
-        public  List<ComplexAxisItemDescriptor> complexAxisItemTypes(){
-            def cait = Jenkins.getInstance().<ComplexAxisItem,ComplexAxisItemDescriptor>getDescriptorList(ComplexAxisItem.class)
+        public  List<ItemDescriptor> complexAxisItemTypes(){
+            def cait = Jenkins.getInstance().<Item,ItemDescriptor>getDescriptorList(Item.class)
 
-            def ret = new ArrayList<ComplexAxisItemDescriptor>()
+            def ret = new ArrayList<ItemDescriptor>()
 
             for( int i = 0; i < cait.size(); i++) {
                 def name = cait.get(i).getClass().getName()
@@ -95,7 +95,7 @@ public class SeleniumAxis extends ComplexAxis{
 
                 sel.seleniumCapabilities
             }catch(ex){
-                ComplexAxisItem.emptyList()
+                Item.emptyList()
             }
         }
 

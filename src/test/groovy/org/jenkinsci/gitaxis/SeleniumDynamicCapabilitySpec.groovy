@@ -1,7 +1,5 @@
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
-import hudson.matrix.AxisList
-import hudson.matrix.MatrixProject
 import jenkins.model.Jenkins
 import org.jvnet.hudson.test.JenkinsRule
 import org.junit.Rule

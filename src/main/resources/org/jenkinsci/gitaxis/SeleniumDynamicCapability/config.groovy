@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins.SeleniumDynamicCapability
+package org.jenkinsci.gitaxis.SeleniumDynamicCapability
 /*
 This Groovy script is used to produce the global configuration option.
 

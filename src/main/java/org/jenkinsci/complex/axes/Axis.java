@@ -1,38 +1,38 @@
-package org.jenkinsci.plugins;
+package org.jenkinsci.complex.axes;
 
-import hudson.matrix.Axis;
 import hudson.matrix.MatrixBuild;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ComplexAxis extends Axis{
+public abstract class Axis extends hudson.matrix.Axis {
 
-    private final List<? extends ComplexAxisItem> complexAxisItems;
+    private final List<? extends Item> complexAxisItems;
 
-    public List<? extends ComplexAxisItem> getComplexAxisItems(){
+    public List<? extends Item> getComplexAxisItems(){
         return Collections.unmodifiableList(complexAxisItems);
     }
 
-    public ComplexAxis(String name, String value){
+    public Axis(String name, String value){
         super(name, value);
-        complexAxisItems = new ArrayList<ComplexAxisItem>();
+        complexAxisItems = new ArrayList<Item>();
     }
 
-    public ComplexAxis(String name, List<? extends ComplexAxisItem> complexAxisItem){
-        super(name, ComplexAxis.convertToAxisValue(complexAxisItem));
-        this.complexAxisItems = (complexAxisItem!=null)?complexAxisItem:ComplexAxisItem.emptyList();
+    public Axis(String name, List<? extends Item> complexAxisItem){
+        super(name, Axis.convertToAxisValue(complexAxisItem));
+        this.complexAxisItems = (complexAxisItem!=null)?complexAxisItem: Item.emptyList();
     }
 
-    public static String convertToAxisValue(List<? extends ComplexAxisItem> complexAxisItems){
+    public static String convertToAxisValue(List<? extends Item> complexAxisItems){
         StringBuilder ret = new StringBuilder();
         boolean valueDefined = false;
 
         if(complexAxisItems == null)
-            complexAxisItems = ComplexAxisItem.emptyList();
+            complexAxisItems = Item.emptyList();
 
-        for (ComplexAxisItem item : complexAxisItems) {
+        for (Item item : complexAxisItems) {
             String i = item.toString();
             if( i.length() > 0){
                 valueDefined = true;

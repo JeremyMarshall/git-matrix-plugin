@@ -1,12 +1,13 @@
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
 import hudson.Extension
+import org.jenkinsci.complex.axes.Item
+import org.jenkinsci.complex.axes.ItemDescriptor
 import org.kohsuke.stapler.DataBoundConstructor
-import hudson.model.Descriptor
 
 import java.util.regex.Matcher
 
-class SeleniumCapability extends  ComplexAxisItem implements Comparable {
+class SeleniumCapability extends  Item implements Comparable {
 
     protected Integer maxInstances
     protected String browserName
@@ -68,7 +69,7 @@ class SeleniumCapability extends  ComplexAxisItem implements Comparable {
         this.browserVersion
     }
 
-    @Extension public static class DescriptorImpl extends ComplexAxisItemDescriptor {
+    @Extension public static class DescriptorImpl extends ItemDescriptor {
 
         @Override public String getDisplayName() {
             return "Defined Capability";

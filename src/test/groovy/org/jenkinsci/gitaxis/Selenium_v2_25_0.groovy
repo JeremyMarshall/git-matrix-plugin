@@ -1,7 +1,6 @@
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
 import spock.lang.*
-import org.junit.Rule
 
 class Selenium_v2_25_0 extends Specification{
 

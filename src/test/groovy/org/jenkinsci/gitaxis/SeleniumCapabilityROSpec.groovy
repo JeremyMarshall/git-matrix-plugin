@@ -1,6 +1,5 @@
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
-import org.junit.Rule
 import spock.lang.Specification
 
 class SeleniumCapabilityROSpec extends Specification{

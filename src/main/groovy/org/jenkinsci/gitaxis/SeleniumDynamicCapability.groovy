@@ -1,17 +1,23 @@
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
 import hudson.Extension
-import hudson.util.FormValidation
-import org.kohsuke.stapler.DataBoundConstructor
 import hudson.model.Descriptor
-import hudson.DescriptorExtensionList
 import jenkins.model.Jenkins
-import org.kohsuke.stapler.QueryParameter
+import org.jenkinsci.complex.axes.AxisDescriptor
+import org.jenkinsci.complex.axes.Container
+import org.jenkinsci.complex.axes.ContainerDescriptor
+import org.jenkinsci.complex.axes.Item
+import org.kohsuke.stapler.DataBoundConstructor
 
-class SeleniumDynamicCapability extends  ComplexAxisItemContainer {
+class SeleniumDynamicCapability extends  Container {
 
     SeleniumDynamicCapability() {
         super(new ArrayList<SeleniumCapabilityRO>())
+    }
+
+    @DataBoundConstructor
+    SeleniumDynamicCapability(List<SeleniumCapabilityRO> seleniumCapabilities) {
+        super( seleniumCapabilities)
     }
 
     List<SeleniumCapabilityRO> getSeleniumCapabilities(){
@@ -20,11 +26,6 @@ class SeleniumDynamicCapability extends  ComplexAxisItemContainer {
 
     void setSeleniumCapabilities(List<SeleniumCapabilityRO> sc){
         setComplexAxisItems(sc)
-    }
-
-    @DataBoundConstructor
-    SeleniumDynamicCapability(List<SeleniumCapabilityRO> seleniumCapabilities) {
-        super( seleniumCapabilities)
     }
 
     String toString(){
@@ -56,10 +57,10 @@ class SeleniumDynamicCapability extends  ComplexAxisItemContainer {
         return list;
     }
 
-    @Extension public static class DescriptorImpl extends ComplexAxisItemContainerDescriptor {
+    @Extension public static class DescriptorImpl extends ContainerDescriptor {
 
         //so we need this to get at the name of the selenium server in the global config
-        protected static Descriptor<? extends ComplexAxisDescriptor> getTopLevelDescriptor(){
+        protected static Descriptor<? extends AxisDescriptor> getTopLevelDescriptor(){
             SeleniumAxis.DescriptorImpl sad = Jenkins.getInstance().getDescriptor(SeleniumAxis.class)
             sad.load()
 
@@ -67,7 +68,7 @@ class SeleniumDynamicCapability extends  ComplexAxisItemContainer {
         }
 
         @Override
-        public   List<? extends ComplexAxisItem> loadDefaultItems(ArrayList<? extends ComplexAxisItem> cai){
+        public   List<? extends Item> loadDefaultItems(ArrayList<? extends Item> cai){
             def sdc = new SeleniumDynamicCapability(loadDefaultItems())
 
             cai.add(sdc)

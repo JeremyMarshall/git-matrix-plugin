@@ -1,4 +1,4 @@
-package org.jenkinsci.plugins
+package org.jenkinsci.gitaxis
 
 import hudson.matrix.*
 import jenkins.model.Jenkins
